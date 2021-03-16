@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Dificultad from './src/screens/Dificultad';
+import Normal from './src/screens/Normal';
+import Dificil from './src/screens/Dificil';
+import { LogBox } from 'react-native';
+import { useEffect } from 'react';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    useEffect(() => {
+        LogBox.ignoreAllLogs();
+    }, []);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='Dificultad'>
+                <Stack.Screen name='Dificultad' component={Dificultad} />
+                <Stack.Screen name='Normal' component={Normal} />
+                <Stack.Screen name='Dificil' component={Dificil} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
